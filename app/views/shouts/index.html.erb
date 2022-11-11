@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+<h1>Shouts</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Body</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @shouts.each do |shout| %>
+      <tr>
+        <td><%= shout.body %></td>
+        <td><%= shout.user_id %></td>
+        <td><%= link_to 'Show', shout %></td>
+        <td><%= link_to 'Edit', edit_shout_path(shout) %></td>
+        <td><%= link_to 'Destroy', shout, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<%= link_to 'New Shout', new_shout_path %>
