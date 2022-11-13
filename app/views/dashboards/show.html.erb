@@ -1,8 +1,11 @@
 <h1>Dashboard</h1>
 <%= form_for @shout do |form| %>
-  <%= form.text_area :body, placeholder: "shout here!", required: true %>
-  <%= form.submit "Shout!" %>
+  <%= form.fields_for :content do |content_form| %>
+    <%= content_form.text_area :body, placeholder: "shout here!", required: true %>
+    <%= content_form.submit "Shout!" %>
+  <% end %>
 <% end %>
+
 <br>
 <%if @shouts.count > 0 %>
   <h1>Shouts</h1>
@@ -18,7 +21,7 @@
     <tbody>
       <% @shouts.each do |shout| %>
         <tr>
-          <td><%= shout.body %></td>
+          <td><%= shout.content.body %></td>
           <td><%= shout.username %></td>
           <td><%= time_ago_in_words(shout.created_at) %> ago</td>
           <td><%= link_to 'Show', shout %></td>

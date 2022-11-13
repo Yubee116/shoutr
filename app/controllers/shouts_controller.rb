@@ -66,6 +66,14 @@ class ShoutsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def shout_params
-    params.require(:shout).permit(:body, :user_id)
+    { content: content_from_params }
+  end
+
+  def content_from_params
+    TextShout.new(content_params)
+  end
+
+  def content_params
+    params.require(:shout).require(:content).permit(:body, :user_id)
   end
 end
